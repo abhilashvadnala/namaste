@@ -1,1 +1,4 @@
 react.js
+node_modules
+.parcel-cache
+dist
