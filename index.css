@@ -1,15 +1,88 @@
+.root {
+    display: flex;
+}
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    background-color: rgb(254, 244, 243);
 }
 
-.logo-container {
-    max-height: 100px;
+.logo-container img {
+    max-height: 50px;
+    width: auto;
 }
 
-.navigation-list > ul {
+.search {
     display: flex;
-    list-style-type: none;
+    justify-content: center;
+    width: 500px;
+}
+
+.search > input {
+    margin: 0px 10px;
+    border-radius: 10px;
+    height: 25px;
+    width: 350px;
+}
+
+.search > button {
+    border-radius: 10px;
+}
+
+.nav-container .navigation-list {
+    display: flex;
+    list-style: none;
+    font-size: 20px;
+    margin: 20px;
+    padding: 0;
+}
+
+.nav-list-item {
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-list-item:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 4px;
+}
+
+.body {
     padding: 15px;
-    margin-right: 10px;
+}
+
+.res-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.res-card {
+    width: 300px;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+.res-card:hover {
+    cursor: pointer;
+    border: 2px solid rgb(254, 244, 243);
+}
+
+.res-img {
+    width: 100%;
+    height: 260px;
+}
+
+.res-card h3, .res-card h4, .res-card h5, .res-card p {
+    margin: 5px 10px;
+}
+
+.res-card h3 {
+    margin-top: 10px;
 }
