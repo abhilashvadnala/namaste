@@ -1,6 +1,6 @@
 import { CDN_URL } from "../utils/constnants";
 
-export default RestrauntCard = (props) => {
+export default RestaurantCard = (props) => {
     const { name, cloudinaryImageId, costForTwo, cuisines, avgRating, totalRatingsString } = props.resData;
     let imgUrl = `${CDN_URL}${cloudinaryImageId}`;
     return (
