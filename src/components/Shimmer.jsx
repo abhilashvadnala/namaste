@@ -1,6 +1,6 @@
 import React  from "react";
 
-const ShimmerCard = ({key}) => <div className="shimmer-card" key={key}></div>;
+const ShimmerCard = () => <div className="shimmer-card"></div>;
 
 export default Shimmer = () => {
     return (
