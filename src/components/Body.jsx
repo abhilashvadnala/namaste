@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { RES_LISTS_API_URL } from '../utils/constnants';
-import RestaurantCard from './RestaurantCard';
+import RestaurantCard, { labledRestaurantCard } from './RestaurantCard';
 import Shimmer from './Shimmer';
 import Search from './Search';
 import { Link } from 'react-router-dom';
+import useOnlineStatus from '../utils/useOnilneStatus';
 
 export default Body = () => {
     const [resList, setResList] = useState([]);
@@ -57,6 +58,9 @@ export default Body = () => {
         }
     };
 
+    // extracted Higher Order Component
+    const LabledRestaurantCard = labledRestaurantCard(<RestaurantCard />)
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -65,36 +69,41 @@ export default Body = () => {
         applySearchFilter();
     }, [searchTerm, resList]);
 
+    const onlineStatus = useOnlineStatus();
+
+    if (onlineStatus === false) {
+        return (
+            <h1>Looks like you are offline. Please check your internet connection</h1>
+        )
+    }
+
     return resList.length === 0 ? <Shimmer /> : (
         <div className="body">
-            <div className="search">
-                <div className="search-tags">
-                    <button
-                        className={`search-tag-btn ${activeFilter === 'topRated' ? 'active' : ''}`}
-                        onClick={toggleFilter('topRated')}
-                    >
+            <div className="flex justify-center mt-8">
+                <Search searchFn={setSearchTerm} />
+                <div className='mx-4'>|</div>
+                <div>
+                    <button className="mr-4" onClick={toggleFilter('topRated')}>
                         Over 4.5 ★
                     </button>
-                    <button
-                        className={`search-tag-btn ${activeFilter === 'fastDelivery' ? 'active' : ''}`}
-                        onClick={toggleFilter('fastDelivery')}
-                    >
+                    <button className="mx-4" onClick={toggleFilter('fastDelivery')}>
                         Under 30 min
                     </button>
                 </div>
-                <Search searchFn={setSearchTerm} />
             </div>
-            <div className="res-container">
-                {
-                    displayList.map((item) => (
-                        <Link
-                            to={"/restaurants/" + item.info.id}
-                            key={item.info.id}
-                            style={{ textDecoration: "none", color: 'black' }}
-                        >
-                            <RestaurantCard resData={item.info} />
-                        </Link>))
-                }
+            <div className="flex flex-wrap mx-20 justify-center">
+                {displayList.map((item) => (
+                    <Link
+                        to={"/restaurants/" + item.info.id}
+                        key={item.info.id}
+                        style={{ textDecoration: "none", color: 'black' }}
+                    >
+                        {
+                            item.info?.loyaltyDiscoverPresentationInfo?.freedelMessage === 'FREE DELIVERY'
+                                ? <LabledRestaurantCard resData={item.info} />
+                                : <RestaurantCard resData={item.info} />
+                        }
+                    </Link>))}
             </div>
         </div>
     );

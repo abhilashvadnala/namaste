@@ -6,10 +6,10 @@ export default Search = ({ searchFn }) => {
         searchFn(searchText);
     }
     return (
-        <div className="search-bar-container">
+        <div className="search-bar-container flex space-x-2">
             <div className="search-bar">
                 <input
-                    className="search-bar-input"
+                    className="search-bar-input border border-solid border-black"
                     type="text"
                     placeholder="Search restaurant or food..."
                     style={{ padding: '0px 10px' }}
@@ -27,7 +27,7 @@ export default Search = ({ searchFn }) => {
                     </button>
                 )}
             </div>
-            <button className='search-bar-btn' onClick={searchRestaurants} >Search</button>
+            <button className='search-bar-btn mx-4' onClick={searchRestaurants} >Search</button>
         </div>
     );
 }
